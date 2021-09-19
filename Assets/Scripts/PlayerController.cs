@@ -10,10 +10,19 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
+    private int count;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        count = 0;
+
+        SetCountText();
+
+        // Set the text property of the Win Text UI to an empty string, making the 'You Win' (game over message) blank
+        winTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -35,6 +44,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
+            count = count + 1;
+            SetCountText();
         }
         
     
